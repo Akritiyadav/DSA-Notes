@@ -8,7 +8,7 @@ On the second level there are
 two nodes 2, 3 clearly it is the 
 maximum number of nodes at any level
 
-*Solution*
+//Solution
  int getMaxWidth(Node* root) {
 int ans = 0;                        
         if(!root) return ans;
