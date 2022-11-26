@@ -1,0 +1,58 @@
+Input: startTime = [1,2,3,3], endTime = [3,4,5,6], profit = [50,10,40,70]
+Output: 120
+Explanation: The subset chosen is the first and fourth job. 
+Time range [1-3]+[3-6] , we get profit of 120 = 50 + 70.
+
+
+struct job{
+    int start,end,profit;
+    job(int s,int e,int p)
+    {
+        start=s;
+        end = e;
+        profit = p;
+    }
+    job()
+    {
+        start = 0,end=0,profit=0;
+    }
+};
+
+bool mycmp(job&a,job&b)
+{
+    if(a.end==b.end)
+        return a.start<b.start;
+    return a.end<b.end;
+}
+
+int latestNonConflict(job arr[], int i)
+{
+    for (int j=i-1; j>=0; j--)
+    {
+        if (arr[j].end <= arr[i].start)
+            return j;
+    }
+    return -1;//if no previous job exists
+}
+
+class Solution {
+public:
+    int jobScheduling(vector<int>& startTime, vector<int>& endTime, vector<int>& profit) {
+        int n = startTime.size();
+        job jobarr[n];
+        for(int i=0;i<n;i++)
+            jobarr[i] = job(startTime[i],endTime[i],profit[i]);
+        sort(jobarr,jobarr+n,mycmp);//sort according to end time
+        vector<int> dp(n,0);//dp[i] stores max profit till ith job
+        dp[0] = jobarr[0].profit;
+        for(int i=1;i<n;i++)
+        {
+            int inc = jobarr[i].profit;
+            int  l = latestNonConflict(jobarr,i);//returns the latest previous job after which i can be scheduled
+            if(l!=-1)//if such a job exists include it's profit
+                inc += dp[l]; 
+            dp[i] = max(inc,dp[i-1]);//max profit either by including current job or excluding it
+        }
+        return dp[n-1];//return max profit possible in entire array
+    }
+};
