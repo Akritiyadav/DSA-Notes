@@ -1,6 +1,6 @@
 class Solution {
 public:
-    
+     //best Approach
     // To check if it is valid,
     // Firstly, replace the character with a '.' so that we can check even after this it is already present or not .. 
     //  - Check for the entire row if it already has the same character twice? Return false if it does
