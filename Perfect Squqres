@@ -1,9 +1,10 @@
+problem:
 return the least number of perfect square numbers that sum to n
 Input: n = 12
 Output: 3
 Explanation: 12 = 4 + 4 + 4.
 
-
+solution:
 class Solution {
 public:
     int dp[10005];
