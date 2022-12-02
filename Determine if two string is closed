@@ -1,0 +1,18 @@
+Input: word1 = "abc", word2 = "bca"
+Output: true
+Explanation: You can attain word2 from word1 in 2 operations.
+Apply Operation 1: "abc" -> "acb"
+Apply Operation 1: "acb" -> "bca"
+
+String 1 = "aabaacczp"        String 2="bbzbbaacp"
+Frequency in string1 :                         Frequency in string2 :
+	    a->4                                                b->4
+		b->1                                                a->2
+		c->2                                                z->1
+		z->1                                                c->1
+		p->1                                                p->1
+		
+see in String 1 count array ->   1, 1, 1, 2, 4 =>sorted order
+and in String 2 count array ->   1, 1, 1, 2, 4 =>sorted order
+
+Unique all char   a,b,c,z,p  in string 1 is there as well in string2 so it's a valid One just return True
