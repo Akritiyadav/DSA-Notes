@@ -44,7 +44,7 @@
     }
     
     
-    using dfs
+    using dfs (alternate Solution)
     
       private:
    bool dfs(int node , int parent, int vis[], vector<int>adj[]){
@@ -70,3 +70,4 @@
         }
        return false; 
     }
+
