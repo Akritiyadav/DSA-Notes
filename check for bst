@@ -12,8 +12,6 @@ class Solution
     //Function to check whether a Binary Tree is BST or not.
     bool isBST(Node* root) 
     {
-        // Your code here
-        return valid(root, LONG_MIN,LONG_MAX);
-        
+        return valid(root, LONG_MIN,LONG_MAX);   
     }
 };
