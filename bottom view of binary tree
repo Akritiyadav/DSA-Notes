@@ -1,5 +1,4 @@
-class Solution {
-  public:
+
     vector <int> bottomView(Node *root) {
         vector<int> ans; 
         if(root == NULL) return ans; 
@@ -27,4 +26,4 @@ class Solution {
         }
         return ans;  
     }
-};
+
