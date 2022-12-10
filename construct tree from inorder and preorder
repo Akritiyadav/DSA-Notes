@@ -1,4 +1,4 @@
-
+ //Solution
 class Solution{
   public:
     int findIndex(int arr[], int start, int target)
