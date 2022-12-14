@@ -6,9 +6,11 @@ public:
         if(!root){
             return NULL;
         }
+        
         //cases: 1->key node is leaf node
             //   2->key node have only one child
             //   3->key node is parent have 2 childrens
+            
         if(root->val > key){
             //move left
             root->left = deleteNode(root->left,key);
