@@ -1,0 +1,62 @@
+	Case 1 : Pick single element, so in this we pick current and call for index + 1. 
+		note : In case of single pick, element should not be '0' as it is invalid
+			
+			-> ways = decode(s, idx+1, n)  
+			: elements in range [1,9] is covered here in this case
+			
+	Case 2 : Pick couple, so that we can get elements in range [10, 26] . 
+		Catch here is that we need to check and validate values so that we do not exceed the range. 
+		
+		conditions : 
+			-> idx+1 < n , mean we are no going out of bounds.
+			-> s[idx] == '1' && s[idx+1] <= '9' , here range [10, 19] is covered
+			-> s[idx] == '2' && s[idx+1] < '7' , here range [20, 26] is covered
+		
+		Thus final condition becomes :
+			-> if(idx+1 < n && ((s[idx] == '1' && s[idx+1] <= '9') || (s[idx]=='2' && s[idx+1] < '7')))
+		
+		Now, in this case, we need to increment index+2, since we have already included next element along with current element. 
+			=> ways += decode(s, idx+2, n)
+
+Now that we have taken care of all the cases, but wait, where is the base condition?
+Lets see where and how we will terminate the recursion and return.
+Case 1 : If current element is 0, we simply return 0 as it is not possible to get a character using 0. 
+		Zero will only be used in couple with some number occuring before it. Ex : 1 0 , or 2 0 
+
+	-> if(idx < n && s[idx] < 0) return 0;
+	->This means that we cannot move further in decoding the string. Need to find some other way.
+
+Case 2 : This is most important condition which gives us our answer. When we reach the end of the string this means that we have found a possible way to decode. 
+	Thus this will contribute to answer and return 1. 
+	
+	-> if(idx >= n) return 1;  
+	-> Ex : s = "1 2 0 2 5" , so if reach '5' somehow , that the decoded string required. Thus return 1
+
+CODE:-
+class Solution {
+public:
+    
+    int decode(string& s, int idx, int n)
+    {
+        if(idx < n && s[idx] == '0') return 0;
+        if(idx >= n)
+            return 1;
+        
+        int ways = 0;
+        
+        // Pick single
+        if(s[idx] != '0') ways = decode(s, idx+1, n);
+            
+        // Pick couple
+        if(idx+1 < n && ((s[idx] == '1' && s[idx+1] <= '9') || (s[idx]=='2' && s[idx+1] < '7')))
+           ways += decode(s, idx+2, n);
+           
+        return ways;
+    }
+    
+    int numDecodings(string s) {
+       
+        int n = s.size();
+        return decode(s, 0, n);
+    }
+};
